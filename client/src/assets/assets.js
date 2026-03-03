@@ -22,6 +22,7 @@ import heartIcon from './heartIcon.svg'
 import badgeIcon from './badgeIcon.svg'
 import menuIcon from './menuIcon.svg'
 import closeMenu from './closeMenu.svg'
+import luxebookIcon from './luxebook-logo.svg'
 import guestsIcon from './guestsIcon.svg'
 import roomImg1 from './roomImg1.png'
 import roomImg2 from './roomImg2.png'
@@ -41,6 +42,7 @@ import totalRevenueIcon from "./totalRevenueIcon.svg";
 
 export const assets = {
     logo,
+    luxebookIcon,
     searchIcon,
     userIcon,
     calenderIcon,
