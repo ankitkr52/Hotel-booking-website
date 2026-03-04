@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import { useClerk, useUser, UserButton } from '@clerk/clerk-react';
@@ -19,21 +19,30 @@ const Navbar = () => {
 
 
 
-    const [isScrolled, setIsScrolled] = React.useState(false);
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const { openSignIn } = useClerk()
     const { user } = useUser()
     const navigate = useNavigate()
     const location = useLocation()
 
-    React.useEffect(() => {
+    useEffect(() => {
+        if (location.pathname !== '/') {
+            setIsScrolled(true);
+            return;
+        }
+        else {
+
+            setIsScrolled(false);
+        }
+        setIsScrolled(prev => location.pathname !== '/' ? true : prev);
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [location.pathname]);
 
     return (
         <nav className={`fixed top-0 left-0 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${isScrolled ? "bg-transparent shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4" : "py-4 md:py-6"}`}>
