@@ -1,5 +1,5 @@
 import React from 'react'
-import heroImage from '../assets/heroImage.png'
+import heroImage from '../assets/heroImage4.png'
 import { assets } from '../assets/assets'
 import { cities } from '../assets/assets'
 
