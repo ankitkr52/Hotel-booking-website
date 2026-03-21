@@ -70,7 +70,6 @@ const NewsLetter = () => {
                     </a>
                     {' '}and consent to receive updates.
                 </p>
-
                 {/* Trust Indicators */}
                 <div className='flex items-center gap-6 mt-8 text-gray-400 text-xs'>
                     <div className='flex items-center gap-2'>
