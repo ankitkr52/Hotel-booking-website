@@ -3,68 +3,109 @@ import { assets } from '../assets/assets'
 
 const Footer = () => {
     return (
-        <div className='bg-[#F6F9FC] text-gray-500/80 pt-8 px-6 md:px-16 lg:px-24 xl:px-32'>
-            <div className='flex flex-wrap justify-between gap-12 md:gap-6'>
-                <div className='max-w-80'>
-                    <img src={assets.luxebookIcon} alt="logo" className='mb-4 h-10 md:h-14' />
-                    <p className='text-sm'>
-                        Discover the world's most extraordinary places to stay, from boutique hotels to luxury villas and private islands.
-                    </p>
-                    <div className='flex items-center gap-3 mt-4'>
-                        <img src={assets.instagramIcon} alt="instagram" className='w-6' />
+        <footer className='relative bg-white text-gray-600 pt-20 px-6 md:px-16 lg:px-24 xl:px-32 overflow-hidden border-t border-gray-200'>
+            {/* Subtle Pattern Background */}
+            <div className='absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40' />
+            
+            {/* Top Accent Line */}
+            <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500' />
+            
+            {/* Main Content */}
+            <div className='relative z-10'>
+                {/* Top Section */}
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16'>
+                    {/* Company Info */}
+                    <div className='lg:col-span-1'>
+                        <img 
+                            src={assets.luxebookIcon} 
+                            alt="LuxeBook" 
+                            className='mb-6 h-12 md:h-16' 
+                        />
+                        <p className='text-gray-600 leading-relaxed mb-6 text-sm'>
+                            Discover the world's most extraordinary places to stay, from boutique hotels to luxury villas and private islands.
+                        </p>
+                        
+                        {/* Social Links */}
+                        <div className='flex items-center gap-3'>
+                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                                <img src={assets.instagramIcon} alt="Instagram" className='w-5 brightness-0 invert' />
+                            </a>
+                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                                <img src={assets.twitterIcon} alt="Twitter" className='w-5 brightness-0 invert' />
+                            </a>
+                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                                <img src={assets.facebookIcon} alt="Facebook" className='w-5 brightness-0 invert' />
+                            </a>
+                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-blue-700 to-blue-800 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                                <img src={assets.linkendinIcon} alt="LinkedIn" className='w-5 brightness-0 invert' />
+                            </a>
+                        </div>
+                    </div>
 
-                        <img src={assets.twitterIcon} alt="twittericon" className='w-6' />
-                        <img src={assets.facebookIcon} alt="facebookicon" className='w-6' />
-                        <img src={assets.linkendinIcon} alt="linkdinicon" className='w-6' />
+                    {/* Company Links */}
+                    <div>
+                        <h3 className='font-playfair text-lg font-bold text-gray-900 mb-6'>Company</h3>
+                        <ul className='space-y-3 text-sm'>
+                            {['About Us', 'Careers', 'Press', 'Blog', 'Partners'].map((item) => (
+                                <li key={item}>
+                                    <a href="#" className='text-gray-600 hover:text-orange-600 hover:pl-2 transition-all duration-300 inline-block'>
+                                        {item}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Support Links */}
+                    <div>
+                        <h3 className='font-playfair text-lg font-bold text-gray-900 mb-6'>Support</h3>
+                        <ul className='space-y-3 text-sm'>
+                            {['Help Center', 'Safety Info', 'Cancellation', 'Contact Us', 'Accessibility'].map((item) => (
+                                <li key={item}>
+                                    <a href="#" className='text-gray-600 hover:text-orange-600 hover:pl-2 transition-all duration-300 inline-block'>
+                                        {item}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Newsletter */}
+                    <div>
+                        <h3 className='font-playfair text-lg font-bold text-gray-900 mb-6'>Newsletter</h3>
+                        <p className='text-gray-600 mb-6 text-sm'>
+                            Get travel inspiration and exclusive offers.
+                        </p>
+                        <div className='flex items-center bg-gray-50 rounded-full p-1.5 border border-gray-200 focus-within:ring-2 focus-within:ring-orange-500 transition-all'>
+                            <input 
+                                type="email" 
+                                className='bg-transparent flex-1 px-4 py-2 outline-none text-gray-900 text-sm placeholder:text-gray-400' 
+                                placeholder='Your email' 
+                            />
+                            <button className='bg-gradient-to-r from-orange-500 to-pink-500 p-2.5 rounded-full hover:scale-105 transition-transform'>
+                                <svg className='w-4 h-4 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 8l4 4m0 0l-4 4m4-4H3' />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <p className='font-playfair text-lg text-gray-800'>COMPANY</p>
-                    <ul className='mt-3 flex flex-col gap-2 text-sm'>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Partners</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <p className='text-lg text-gray-800'>SUPPORT</p>
-                    <ul className='mt-3 flex flex-col gap-2 text-sm'>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Safety Information</a></li>
-                        <li><a href="#">Cancellation Options</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Accessibility</a></li>
-                    </ul>
-                </div>
-
-                <div className='max-w-80'>
-                    <p className='text-lg text-gray-800'>STAY UPDATED</p>
-                    <p className='mt-3 text-sm'>
-                        Subscribe to our newsletter for inspiration and special offers.
-                    </p>
-                    <div className='flex items-center mt-4'>
-                        <input type="text" className='bg-white rounded-l border border-gray-300 h-9 px-3 outline-none' placeholder='Your email' />
-                        <button className='flex items-center justify-center bg-black h-9 w-9 aspect-square rounded-r'>
-                            {/* Arrow icon */}
-                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 12H5m14 0-4 4m4-4-4-4" /></svg>
-                        </button>
+                {/* Bottom Section */}
+                <div className='border-t border-gray-200 py-8'>
+                    <div className='flex flex-col md:flex-row items-center justify-between gap-4 text-sm'>
+                        <p className='text-gray-600'>
+                            © {new Date().getFullYear()} <span className='font-semibold text-gray-900'>LuxeBook</span>. All rights reserved.
+                        </p>
+                        <ul className='flex items-center gap-6'>
+                            <li><a href="#" className='text-gray-600 hover:text-orange-600 transition-colors'>Privacy</a></li>
+                            <li><a href="#" className='text-gray-600 hover:text-orange-600 transition-colors'>Terms</a></li>
+                            <li><a href="#" className='text-gray-600 hover:text-orange-600 transition-colors'>Cookies</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <hr className='border-gray-300 mt-8' />
-            <div className='flex flex-col md:flex-row gap-2 items-center justify-between py-5'>
-                <p>© {new Date().getFullYear()} <a href="https://prebuiltui.com">PrebuiltUI</a>. All rights reserved.</p>
-                <ul className='flex items-center gap-4'>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                </ul>
-            </div>
-        </div>
+        </footer>
     )
 }
 
