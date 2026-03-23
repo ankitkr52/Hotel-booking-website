@@ -49,7 +49,7 @@ const Navbar = () => {
 
             {/* Logo */}
             <Link to='/'>
-                <img src={assets.luxebookIcon} alt="logo" className={`h-15 ${isScrolled && "invert opacity-80"}`} />
+                <img src={assets.luxebookIcon} alt="logo" className={`h-15 ${isScrolled && ""}`} />
             </Link>
 
             {/* Desktop Nav */}
