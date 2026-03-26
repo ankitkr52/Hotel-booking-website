@@ -10,12 +10,13 @@ lerna-debug.log*
 .env.local
 .env.production
 .env.development
+Allroom2.jsx
 
 node_modules
 dist
 dist-ssr
 *.local
-.Allroom2.jsx
+
 
 
 # Editor directories and files

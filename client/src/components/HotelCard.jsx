@@ -5,7 +5,7 @@ import { assets } from '../assets/assets'
 const HotelCard = ({ room, index }) => {
     return (
         <Link
-            to={'/rooms/' + room._id}
+            to={`/rooms/${room._id}`}
             onClick={() => window.scrollTo(0, 0)}
             className="group relative max-w-70 w-full rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)] hover:-translate-y-3 transition-all duration-500 ease-out"
         >
@@ -21,7 +21,7 @@ const HotelCard = ({ room, index }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
 
                 {/* Shine Effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+               <div className="absolute inset-0 -translate-x-[150%] group-hover:translate-x-[150%] transition-all duration-700 ease-out bg-gradient-to-r from-transparent via-white/40 via-50% to-transparent" />
 
                 {/* Best Seller Badge with Glow */}
                 {index % 2 === 0 && (
