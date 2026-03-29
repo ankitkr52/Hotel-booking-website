@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { assets, facilityIcons, roomsDummyData } from '../assets/assets'
+import { assets, facilityIcons, roomCommonData, roomsDummyData } from '../assets/assets'
 import StarRating from '../components/StarRating'
 
 
@@ -49,63 +49,63 @@ const RoomDetails = () => {
 
       </div>
       {/* Room highlights */}
-     {/* Room Highlights Section */}
-<div className="mt-16">
-  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10">
-    
-    {/* Left Side - Title + Amenities */}
-    <div className="flex-1">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-semibold text-gray-900 leading-tight">
-        Experience Luxury Like Never Before
-      </h1>
+      {/* Room Highlights Section */}
+      <div className="mt-16">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10">
 
-      {/* Amenities */}
-      <div className="mt-8">
-        <p className="text-sm uppercase tracking-widest text-gray-500 font-medium mb-4">
-          ROOM AMENITIES
-        </p>
-        
-        <div className="flex flex-wrap gap-3">
-          {room.amenities.map((item, index) => (
-            <div 
-              key={index} 
-              className="flex items-center gap-3 bg-white border border-gray-200 
+          {/* Left Side - Title + Amenities */}
+          <div className="flex-1">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-semibold text-gray-900 leading-tight">
+              Experience Luxury Like Never Before
+            </h1>
+
+            {/* Amenities */}
+            <div className="mt-8">
+              <p className="text-sm uppercase tracking-widest text-gray-500 font-medium mb-4">
+                ROOM AMENITIES
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                {room.amenities.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 bg-white border border-gray-200 
                          hover:border-orange-200 hover:bg-orange-50 
                          px-5 py-3 rounded-2xl transition-all duration-300 group"
-            >
-              <div className="w-8 h-8 flex items-center justify-center bg-orange-100 
+                  >
+                    <div className="w-8 h-8 flex items-center justify-center bg-orange-100 
                             text-orange-600 rounded-xl group-hover:scale-110 transition-transform">
-                <img 
-                  src={facilityIcons[item]} 
-                  alt={item} 
-                  className="w-5 h-5" 
-                />
+                      <img
+                        src={facilityIcons[item]}
+                        alt={item}
+                        className="w-5 h-5"
+                      />
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">{item}</p>
+                  </div>
+                ))}
               </div>
-              <p className="text-sm font-medium text-gray-700">{item}</p>
             </div>
-          ))}
+          </div>
+
+          {/* Right Side - Price */}
+          <div className="lg:text-right flex-shrink-0">
+            <p className="text-sm uppercase tracking-widest text-gray-500 font-medium mb-1">
+              STARTING FROM
+            </p>
+            <p className="text-5xl md:text-6xl font-semibold text-gray-900">
+              ${room.pricePerNight}
+              <span className="text-xl font-normal text-gray-400">/night</span>
+            </p>
+
+            {/* Optional: Small note */}
+            <p className="text-sm text-green-500 mt-3">
+              Taxes and fees included
+            </p>
+          </div>
+
         </div>
       </div>
-    </div>
-
-    {/* Right Side - Price */}
-    <div className="lg:text-right flex-shrink-0">
-      <p className="text-sm uppercase tracking-widest text-gray-500 font-medium mb-1">
-        STARTING FROM
-      </p>
-      <p className="text-5xl md:text-6xl font-semibold text-gray-900">
-        ${room.pricePerNight}
-        <span className="text-xl font-normal text-gray-400">/night</span>
-      </p>
-      
-      {/* Optional: Small note */}
-      <p className="text-sm text-green-500 mt-3">
-        Taxes and fees included
-      </p>
-    </div>
-
-  </div>
-</div>
       {/* checkin checkout form */}
       <form
         className="flex flex-col lg:flex-row items-center justify-between 
@@ -172,13 +172,51 @@ const RoomDetails = () => {
                transition-all duration-300 active:scale-95 shadow-lg shadow-orange-500/30 
                hover:shadow-xl hover:shadow-orange-500/40 w-full lg:w-auto"
         >
-          Book Now
+          Check Availability
         </button>
 
       </form>
+      {/* common specification  */}
+      <div className='mt-25 space-y-4'>
+        {roomCommonData.map((spec, index) => (
+          <div key={index} className='flex items-start gap-2'>
+            <img src={spec.icon} alt={`${spec.title}-icon`} className='w-6.5' />
+            <div>
+              <p className='text-base'>{spec.title}</p>
+              <p className='text-gray-600'>{spec.description}</p>
+            </div>
 
+          </div>
+        ))}
+      </div>
+      <div className='max-w-3xl border-y border-gray-300 my-15 py-10 text-gray-600'>
+        <p>
+          Guests will be allocated on the ground floor according to availability. You get a comfortable Two bedroom apartment has a true city feeling. The price quoted is for two guest, at the guest slot please mark the number of guests to get the exact price for groups. The Guests will be allocated ground floor according to availability. You get the comfortable two bedroom apartment that has a true city feeling.
+        </p>
+      </div>
+      {/* hosted by */}
 
+      <div className='flex-col flex items-start gap-4'>
+        <div className='flex gap-4'>
+          <img src={room.hotel.owner.image} alt="host" className='h-10 w-10 md:h-12 md:w-12 rounded-full' />
+          <div>
+            <p className='text-lg md:text-xl'>Hosted by {room.hotel.name}</p>
+            <div className='flex items-center mt-2'>
+              <StarRating/>
+              <p className='ml-2'>200+ reviews</p>
+            </div>
+          </div>
+          </div>
+           <button
+          className="mt-4 lg:mt-4 bg-orange-600 hover:bg-orange-700 active:bg-orange-800 
+               text-white font-semibold text-lg px-8 py-2 rounded-2xl 
+               transition-all duration-300 active:scale-95 shadow-lg shadow-orange-500/30 
+               hover:shadow-xl hover:shadow-orange-500/40 w-full lg:w-auto"
+        >
+          Contact Now
+        </button>
 
+      </div>
 
     </div>
   )
