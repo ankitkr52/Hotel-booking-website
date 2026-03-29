@@ -97,7 +97,7 @@ const Footer = () => {
                         <p className='text-gray-600'>
                             © {new Date().getFullYear()} <span className='font-semibold text-gray-900'>LuxeBook</span>. All rights reserved.
                         </p>
-                        <p className='font-playfair text-xl text-gray-600 hover:text-orange-600 transition-colors '>
+                        <p className='font-playfair text-xl text-gray-800 hover:text-orange-600 transition-colors '>
                             Developed by Ankit Sharma
                         </p>
                         <ul className='flex items-center gap-6'>
