@@ -21,7 +21,7 @@ const MyBookings = () => {
                             <img src={booking.room.images[0]} alt="hotel-img" className='min-md:w-44 rounded shadow object-cover' />
                             <div className='flex flex-col gap-1.5 max-md:mt-3 min-md:ml-4'>
                                 <p className='font-playfair text-2xl'>{booking.hotel.name}
-                                    <span className='font-inter text-sm'>({booking.room.roomType})</span>
+                                    <span className='font-inter text-sm'> ({booking.room.roomType})</span>
                                 </p>
                                 <div className='flex items-center gap-1 text-sm text-gray-500'>
                                     <img src={assets.locationIcon} alt="location-Icons" />
@@ -35,7 +35,17 @@ const MyBookings = () => {
                             </div>
                         </div>
                         {/* date and time */}
-                        <div></div>
+                        <div className='flex flex-row md:items-center md:gap-12 mt-3 gap-8'>
+                            <div>
+                                <p>Check-In:</p>
+                                <p className='text-gray-500 text-sm'>{new Date(booking.checkInDate).toDateString()}</p>
+                            </div>
+                             <div>
+                                <p>Check-Out:</p>
+                                <p className='text-gray-500 text-sm'>{new Date(booking.checkOutDate).toDateString()}</p>
+                            </div>
+
+                        </div>
                         {/* payment status */}
 
                     </div>
