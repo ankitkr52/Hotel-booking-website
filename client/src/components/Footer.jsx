@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className='relative bg-white text-gray-600 pt-20 px-6 md:px-16 lg:px-24 xl:px-32 overflow-hidden border-t border-gray-200'>
             {/* Subtle Pattern Background */}
-            <div className='absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40' />
+            <div className='absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] ' />
 
             {/* Top Accent Line */}
             <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500' />
@@ -13,7 +13,7 @@ const Footer = () => {
             {/* Main Content */}
             <div className='relative z-10'>
                 {/* Top Section */}
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-10'>
                     {/* Company Info */}
                     <div className='lg:col-span-1'>
                         <img
