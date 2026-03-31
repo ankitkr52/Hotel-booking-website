@@ -40,13 +40,20 @@ const MyBookings = () => {
                                 <p>Check-In:</p>
                                 <p className='text-gray-500 text-sm'>{new Date(booking.checkInDate).toDateString()}</p>
                             </div>
-                             <div>
+                            <div>
                                 <p>Check-Out:</p>
                                 <p className='text-gray-500 text-sm'>{new Date(booking.checkOutDate).toDateString()}</p>
                             </div>
 
                         </div>
                         {/* payment status */}
+                        <div className='flex flex-col items-start justify-center pt-3'>
+                            <div className='flex items-center gap-2'>
+                                <div className={`h-3 w-3 rounded-full ${booking.isPaid ? "bg-green-500" : "bg-red-500"}`}></div>
+                                <p className={`text-sm ${booking.isPaid ? "text-green-500" : "text-red-500"}`}>Paid</p>
+                            </div>
+
+                        </div>
 
                     </div>
 
