@@ -10,29 +10,30 @@ const HotelReg = () => {
                     <img src={assets.closeIcon} alt="Close-icon" className='absolute top-4 right-4 h-4 w-4 cursor-pointer' />
                     <p className='text-2xl font-semibold mt-6'>Register Your Hotel</p>
                     <div className='w-full mt-4'>
-                        <label htmlFor="name" className='font-medium text-gray-500'>Hotel Name</label>
+                        <label htmlFor="name" className='font-medium text-gray-500'>Hotel Name <span className='text-red-500'>*</span></label>
                         <input id='name' type="text" placeholder='Type-here' className='border border-gray-200 rounded w-full px-3 py-2.5 mt-2 outline-orange-500 font-light ' required />
 
                     </div>
                     {/* Phone */}
                     <div className='w-full mt-4'>
-                        <label htmlFor="contact" className='font-medium text-gray-500'>Phone</label>
+                        <label htmlFor="contact" className='font-medium text-gray-500'>Phone <span className='text-red-500'>*</span></label>
                         <input id='contact' type="text" placeholder='Type-here' className='border border-gray-200 rounded w-full px-3 py-2.5 mt-2 outline-orange-500 font-light ' required />
 
                     </div>
                     {/* adderess */}
                     <div className='w-full mt-4'>
-                        <label htmlFor="Address" className='font-medium text-gray-500'>Address</label>
+                        <label htmlFor="Address" className='font-medium text-gray-500'>Address <span className='text-red-500'>*</span></label>
                         <input id='Address' type="text" placeholder='Type-here' className='border border-gray-200 rounded w-full px-3 py-2.5 mt-2 outline-orange-500 font-light' required />
 
                     </div>
                     {/* Select city Dropdown */}
                     <div className='w-full mt-4 max-w-60 mr-auto'>
-                        <label htmlFor="city" className='font-medium text-gray-500'>City</label>
+                        <label htmlFor="city" className='font-medium text-gray-500'>City <span className='text-red-500'>*</span></label>
+                        
                         <select id="city" className='border border-gray-200 cursor-pointer rounded w-full px-3 py-2.5 mt-2 outline-orange-500 font-light'>
                             <option value="">Select City</option>
                             {cities.map((city) => (
-                                <option  key={city} value={city}>{city}</option>
+                                <option key={city} value={city}>{city}</option>
                             ))}
                         </select>
                     </div>
