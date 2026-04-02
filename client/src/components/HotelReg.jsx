@@ -7,7 +7,7 @@ const HotelReg = () => {
             <form className='flex bg-white rounded-xl max-w-4xl max-md:mx-2'>
                 <img src={assets.regImage} alt="Reg-img" className='w-1/2 rounded-xl hidden md:block' />
                 <div className='relative flex flex-col items-center md:w-1/2 p-8 md:p-10'>
-                    <img src={assets.closeIcon} alt="Close-icon" className='absolute top-4 right-4 h-4 w-4 cursor-pointer' />
+                    <img src={assets.closeIcon} alt="Close-icon" className='absolute top-4 right-4 h-4 w-4 cursor-pointer ' />
                     <p className='text-2xl font-semibold mt-6'>Register Your Hotel</p>
                     <div className='w-full mt-4'>
                         <label htmlFor="name" className='font-medium text-gray-500'>Hotel Name <span className='text-red-500'>*</span></label>
