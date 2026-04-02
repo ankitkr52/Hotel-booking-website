@@ -1,5 +1,5 @@
 import React from 'react'
-import heroImage from '../assets/heroImage3.png'
+import heroImage from '../assets/heroImage4.png'
 import { assets } from '../assets/assets'
 import { cities } from '../assets/assets'
 
@@ -24,6 +24,7 @@ const Hero = () => {
                 <div>
                     <div className='flex items-center gap-2'>
                         <img src={assets.calenderIcon} alt="" className='h-4' />
+                        
                         <label htmlFor="destinationInput">Destination</label>
                     </div>
                     <input list='destinations' id="destinationInput" type="text" className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" placeholder="Type here" required />
