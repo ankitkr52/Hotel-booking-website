@@ -12,8 +12,11 @@ const Sidebar = () => {
 
   return (
     <div className='md:w-64 w-16 border-r h-full text-base border-gray-500 pt-4 flex flex-col transition-all duration-300'>
-      {sidebarLinks.map((items,idex)=>(
-        <NavLink to={items.path} key={index} end="/owner" className={}>
+      {sidebarLinks.map((items,index)=>(
+        <NavLink to={items.path} key={index} end="/owner" className={({isActive})=>`
+        flex items-center py-3 px-4 md:px-8 gap-3 ${isActive ?"border-r-4 md:border-r-[6px] bg-blue-600/10 text-blue-600":"hover:bg-gray-100/90 border-white text-gray-700" }`}>
+          <img src={items.icons} alt={items.name} className='min-h-6 min-w-6' />
+          <p className='md:block hidden text-center'>{items.name}</p>
 
         </NavLink>
       ))}
