@@ -1,5 +1,5 @@
 import React from 'react'
-import heroImage from '../assets/heroImage4.png'
+import heroImage from '../assets/heroImage3.png'
 import { assets } from '../assets/assets'
 import { cities } from '../assets/assets'
 
@@ -19,7 +19,7 @@ const Hero = () => {
 
 
 
-            <form className='bg-white text-gray-500 mt-8 rounded-lg px-6 py-4  flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto'>
+            <form className='bg-gray-200 text-gray-500 mt-8 rounded-lg px-6 py-4  flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto'>
 
                 <div>
                     <div className='flex items-center gap-2'>
