@@ -11,11 +11,11 @@ const HotelCard = ({ room, index }) => {
         >
             {/* Image Container with Overlay */}
             <div className="relative overflow-hidden h-48">
-                {/* <img
+                <img
                     src={room.images[0]}
                     alt={room.name}
                     className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-1000 ease-out"
-                /> */}
+                />
 
                 {/* Animated Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
@@ -33,7 +33,7 @@ const HotelCard = ({ room, index }) => {
 
             {/* Card Content */}
             <div className='p-5 bg-gradient-to-b from-white to-gray-50/50 group-hover:from-gray-50 group-hover:to-white transition-colors duration-500'>
-                {/* Hotel Name & Rating */}
+                {/* Hotel Name & Rating
                 <div className='flex items-center justify-between mb-3'>
                     <p className='font-playfair text-xl font-semibold text-gray-800 group-hover:text-black transition-colors duration-300'>
                         {room.hotel.name}
@@ -42,7 +42,7 @@ const HotelCard = ({ room, index }) => {
                         <img src={assets.starIconFilled} alt="star-icon" className="w-4 h-4" />
                         <span className="font-bold text-sm">4.5</span>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Location */}
                 <div className='flex items-center gap-2 text-sm mb-5 text-gray-600 group-hover:text-gray-800 transition-colors duration-300'>
