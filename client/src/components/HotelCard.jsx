@@ -33,7 +33,7 @@ const HotelCard = ({ room, index }) => {
 
             {/* Card Content */}
             <div className='p-5 bg-gradient-to-b from-white to-gray-50/50 group-hover:from-gray-50 group-hover:to-white transition-colors duration-500'>
-                Hotel Name & Rating
+                {/* Hotel Name & Rating */}
                 <div className='flex items-center justify-between mb-3'>
                     <p className='font-playfair text-xl font-semibold text-gray-800 group-hover:text-black transition-colors duration-300'>
                         {room.hotel.name}
