@@ -36,10 +36,39 @@ const Dashboard = () => {
             <tr>
               <th className='py-3 px-4 text-gray-800 font-medium'>User name</th>
               <th className='py-3 px-4 text-gray-800 font-medium max-sm:hidden'>Room name</th>
-              <th className='py-3 px-4 text-gray-800 font-medium text-center text-center'>Total Amount</th>
+              <th className='py-3 px-4 text-gray-800 font-medium text-center'>Total Amount</th>
               <th className='py-3 px-4 text-gray-800 font-medium'>Payment Status</th>
             </tr>
           </thead>
+          <tbody className='text-sm'>
+            {dashboardData.bookings.map((item, index) => (
+
+            
+              <tr key={index} >
+                <td className='py-3 px-4 text-gray-700 border-t border-gray-400'>
+                  {item.user.username}
+                </td>
+
+                <td className='py-3 px-4 text-gray-700 border-t border-gray-400 max-sm:hidden'>
+                  {item.room.roomType}
+                </td>
+
+                <td className='py-3 px-4 text-gray-700 border-t border-gray-400 text-center'>
+                  ${item.totalPrice}
+                </td>
+
+                <td className='py-3 px-4 flex border-t border-gray-400'>
+                  <button className={`py-1 px-3 text-xs rounded-full mx-auto ${item.isPaid ? 'bg-green-300 text-green-700' : 'bg-amber-300 text-yellow-600'}`}>
+                    {item.isPaid ? 'Completed':'Pending'}
+                    </button>
+
+                </td>
+              </tr>
+
+            ))}
+
+          </tbody>
+
         </table>
 
       </div>
