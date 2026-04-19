@@ -30,6 +30,19 @@ const Dashboard = () => {
       </div>
       {/* Recent booking */}
       <h2 className='text-xl text-blue-950/70 font-medium mb-5'>Recent Bookings</h2>
+      <div className='w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll'>
+        <table className='w-full'>
+          <thead className='bg-gray-50'>
+            <tr>
+              <th className='py-3 px-4 text-gray-800 font-medium'>User name</th>
+              <th className='py-3 px-4 text-gray-800 font-medium max-sm:hidden'>Room name</th>
+              <th className='py-3 px-4 text-gray-800 font-medium text-center text-center'>Total Amount</th>
+              <th className='py-3 px-4 text-gray-800 font-medium'>Payment Status</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
     </div>
   )
 }
