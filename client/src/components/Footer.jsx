@@ -27,16 +27,16 @@ const Footer = () => {
 
                         {/* Social Links */}
                         <div className='flex items-center gap-3'>
-                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                            <a href="https://github.com/ankitkr52" target='blank' className='w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
                                 <img src={assets.instagramIcon} alt="Instagram" className='w-5 brightness-0 invert' />
                             </a>
-                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                            <a href="https://github.com/ankitkr52" target='blank' className='w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
                                 <img src={assets.twitterIcon} alt="Twitter" className='w-5 brightness-0 invert' />
                             </a>
-                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                            <a href="https://www.linkedin.com/in/ankit-kumar-2b3381355/" target='blank' className='w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
                                 <img src={assets.facebookIcon} alt="Facebook" className='w-5 brightness-0 invert' />
                             </a>
-                            <a href="#" className='w-10 h-10 bg-gradient-to-br from-blue-700 to-blue-800 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
+                            <a href="https://www.linkedin.com/in/ankit-kumar-2b3381355/" target='blank' className='w-10 h-10 bg-gradient-to-br from-blue-700 to-blue-800 rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-md'>
                                 <img src={assets.linkendinIcon} alt="LinkedIn" className='w-5 brightness-0 invert' />
                             </a>
                         </div>
