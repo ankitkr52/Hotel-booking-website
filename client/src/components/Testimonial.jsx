@@ -8,24 +8,24 @@ const Testimonial = () => {
     <div className='relative flex flex-col items-center px-6 md:px-16 lg:px-24 py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden'>
       {/* Decorative Background Elements */}
       <div className='absolute top-20 right-10 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20 animate-pulse' />
-      <div className='absolute bottom-20 left-10 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-20 animate-pulse' style={{animationDelay: '1s'}} />
-      
+      <div className='absolute bottom-20 left-10 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-20 animate-pulse' style={{ animationDelay: '1s' }} />
+
       {/* Title Section */}
       <div className='max-w-3xl text-center mb-20 z-10'>
         <div className='inline-block px-4 py-1.5 bg-orange-500 text-white text-xs font-semibold rounded-full mb-6 shadow-lg'>
           ⭐ GUEST TESTIMONIALS
         </div>
-        <Title 
-          title="What Our Guests Say" 
-          subTitle="Discover why discerning travelers choose QuickStay for their luxury accommodations around the world." 
+        <Title
+          title="What Our Guests Say"
+          subTitle="Discover why discerning travelers choose QuickStay for their luxury accommodations around the world."
         />
       </div>
 
       {/* Testimonials Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
         {testimonials.map((testimonial, index) => (
-          <div 
-            key={testimonial.id} 
+          <div
+            key={testimonial.id}
             className="group relative bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 overflow-hidden"
             style={{
               animationDelay: `${index * 100}ms`
@@ -33,7 +33,7 @@ const Testimonial = () => {
           >
             {/* Gradient Background on Hover */}
             <div className='absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
-            
+
             {/* Quote Icon Background */}
             <div className='absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity duration-300'>
               <svg className='w-20 h-20 text-orange-500' fill='currentColor' viewBox='0 0 24 24'>
@@ -46,10 +46,10 @@ const Testimonial = () => {
               {/* User Info */}
               <div className="flex items-center gap-4 mb-6">
                 <div className='relative'>
-                  <img 
-                    className="w-16 h-16 rounded-full object-cover ring-4 ring-gray-100 group-hover:ring-orange-500 transition-all duration-300" 
-                    src={testimonial.image} 
-                    alt={testimonial.name} 
+                  <img
+                    className="w-16 h-16 rounded-full object-cover ring-4 ring-gray-100 group-hover:ring-orange-500 transition-all duration-300"
+                    src={testimonial.image}
+                    alt={testimonial.name}
                   />
                   {/* Verified Badge */}
                   <div className='absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center ring-2 ring-white'>
