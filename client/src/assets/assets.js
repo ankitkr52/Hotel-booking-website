@@ -81,7 +81,7 @@ export const assets = {
 export const cities = [
     "Dubai",
     "Singapore",
-    "New York",
+    "New Delhi",
     "London",
 ];
 
@@ -124,10 +124,10 @@ export const userDummyData = {
     "image": assets.logo1,
     "role": "hotelOwner",
     "createdAt": "2025-03-25T09:29:16.367Z",
-    "updatedAt": "2025-04-10T06:34:48.719Z",
+    "updatedAt": "2026-03-10T06:34:48.719Z",
     "__v": 1,
     "recentSearchedCities": [
-        "New York"
+        "New Delhi"
     ]
 }
 
@@ -138,9 +138,9 @@ export const hotelDummyData = {
     "address": "Main Road  123 Street , 23 Colony",
     "contact": "+0123456789",
     "owner": userDummyData,
-    "city": "New York",
-    "createdAt": "2025-04-10T06:22:11.663Z",
-    "updatedAt": "2025-04-10T06:22:11.663Z",
+    "city": "New Delhi",
+    "createdAt": "2026-03-10T06:22:11.663Z",
+    "updatedAt": "2026-04-11T06:22:11.663Z",
     "__v": 0
 }
 
@@ -154,8 +154,8 @@ export const roomsDummyData = [
         "amenities": ["Room Service", "Mountain View", "Pool Access"],
         "images": [roomImg1, roomImg2, roomImg3, roomImg4],
         "isAvailable": true,
-        "createdAt": "2025-04-10T06:26:04.013Z",
-        "updatedAt": "2025-04-10T06:26:04.013Z",
+        "createdAt": "2026-03-10T06:26:04.013Z",
+        "updatedAt": "2026-03-10T06:26:04.013Z",
         "__v": 0
     },
     {
@@ -166,8 +166,8 @@ export const roomsDummyData = [
         "amenities": ["Room Service", "Mountain View", "Pool Access"],
         "images": [roomImg2, roomImg3, roomImg4, roomImg1],
         "isAvailable": true,
-        "createdAt": "2025-04-10T06:25:22.593Z",
-        "updatedAt": "2025-04-10T06:25:22.593Z",
+        "createdAt": "2026-03-10T06:25:22.593Z",
+        "updatedAt": "2026-03-10T06:25:22.593Z",
         "__v": 0
     },
     {
@@ -178,8 +178,8 @@ export const roomsDummyData = [
         "amenities": ["Free WiFi", "Free Breakfast", "Room Service"],
         "images": [roomImg3, roomImg4, roomImg1, roomImg2],
         "isAvailable": true,
-        "createdAt": "2025-04-10T06:24:06.285Z",
-        "updatedAt": "2025-04-10T06:24:06.285Z",
+        "createdAt": "2026-03-10T06:24:06.285Z",
+        "updatedAt": "2026-03-10T06:24:06.285Z",
         "__v": 0
     },
     {
@@ -190,8 +190,8 @@ export const roomsDummyData = [
         "amenities": ["Free WiFi", "Room Service", "Pool Access"],
         "images": [roomImg4, roomImg1, roomImg2, roomImg3],
         "isAvailable": true,
-        "createdAt": "2025-04-10T06:23:20.252Z",
-        "updatedAt": "2025-04-10T06:23:20.252Z",
+        "createdAt": "2026-03-10T06:23:20.252Z",
+        "updatedAt": "2026-03-10T06:23:20.252Z",
         "__v": 0
     }
 ]
@@ -212,8 +212,8 @@ export const userBookingsDummyData = [
         "status": "pending",
         "paymentMethod": "Stripe",
         "isPaid": true,
-        "createdAt": "2025-04-10T06:42:01.529Z",
-        "updatedAt": "2025-04-10T06:43:54.520Z",
+        "createdAt": "2026-03-10T06:42:01.529Z",
+        "updatedAt": "2026-03-10T06:43:54.520Z",
         "__v": 0
     },
     {
@@ -228,8 +228,8 @@ export const userBookingsDummyData = [
         "status": "pending",
         "paymentMethod": "Pay At Hotel",
         "isPaid": false,
-        "createdAt": "2025-04-10T06:41:45.873Z",
-        "updatedAt": "2025-04-10T06:41:45.873Z",
+        "createdAt": "2026-03-10T06:41:45.873Z",
+        "updatedAt": "2026-03-10T06:41:45.873Z",
         "__v": 0
     },
     {
@@ -244,8 +244,8 @@ export const userBookingsDummyData = [
         "status": "pending",
         "paymentMethod": "Pay At Hotel",
         "isPaid": false,
-        "createdAt": "2025-04-10T06:41:20.501Z",
-        "updatedAt": "2025-04-10T06:41:20.501Z",
+        "createdAt": "2026-03-10T06:41:20.501Z",
+        "updatedAt": "2026-03-10T06:41:20.501Z",
         "__v": 0
     }
 ]
