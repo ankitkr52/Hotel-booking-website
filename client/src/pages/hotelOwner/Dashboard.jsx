@@ -58,7 +58,7 @@ const Dashboard = () => {
                 </td>
 
                 <td className='py-3 px-4 flex border-t border-gray-400'>
-                  <button className={`py-1 px-3 text-xs rounded-full mx-auto ${item.isPaid ? 'bg-green-200 text-green-600' : 'bg-amber-300 text-yellow-600'}`}>
+                  <button className={`py-1 px-3 text-xs rounded-full mx-auto ${item.isPaid ? 'bg-green-300 text-green-600' : 'bg-amber-300 text-yellow-600'}`}>
                     {item.isPaid ? 'Completed':'Pending'}
                     </button>
 
