@@ -14,10 +14,10 @@ import ListRoom from './pages/hotelOwner/ListRoom'
 
 const App = () => {
 
-  const isOwnerPath = useLocation().pathname.includes("owner")
+  const isOwnerPath = useLocation().pathname.startsWith("owner")
 
   return (
-    <div>
+    <div  className="min-h-screen flex flex-col">
       {!isOwnerPath && < Navbar />}
       { false &&<HotelReg />}
       <div className='min-h-[70vh]'>
@@ -36,7 +36,7 @@ const App = () => {
           
         </Routes>
       </div>
-     <Footer/>
+   {!isOwnerPath && <Footer />}
     </div>
   )
 }
