@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const { Webhook } = require("svix");
+import User from "../models/User.js";
+import { Webhook } from "svix";
 
 const clerkWebhooks = async (req, res) => {
     try {
@@ -23,10 +23,10 @@ const clerkWebhooks = async (req, res) => {
             _id: data.id,
             email: data.email_addresses[0].email_address,
             username: data.first_name + " " + data.last_name,
-            image: data.image_url,  // ✅ lowercase 'i'
+            image: data.image_url,
         };
 
-        // Switch case for different event types
+        // Switch case
         switch (type) {
             case "user.created":
                 await User.create(userData);
@@ -44,12 +44,11 @@ const clerkWebhooks = async (req, res) => {
                 break;
         }
 
-        
-        res.json({ message: "Webhook received successfully" });
+        res.json({ success: true, message: "Webhook received successfully" });
 
     } catch (error) {
-        console.error("Error processing webhook:", error);
-        res.status(500).json({ message: "Webhook error", error: error.message });
+        console.error(error.message);
+        res.json({ success: false, message: "Webhook verification failed" });
     }
 };
 
