@@ -133,7 +133,7 @@ const Footer = () => {
           </p>
 
           <p className="text-sm font-medium text-white">
-            Crafted by Ankit Kumar
+            Crafted by Nexora
           </p>
 
           <div className="flex gap-5 text-sm text-slate-400">
