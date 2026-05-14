@@ -11,3 +11,12 @@ export const getUsersData = async (req, res) => {
     res.json({success:false,message:error.message});
    }
 }
+
+// store recent searched cities
+export const storeRecentSearchedCities=async(req,res)=>{
+    try {
+        const {recentSearchedCities}=req.body;
+    } catch (error) {
+        res.json({success:false,message:error.message});
+    }
+}
