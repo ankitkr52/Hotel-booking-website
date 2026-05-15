@@ -1,6 +1,6 @@
 import express from "express";
-import { protect } from "../middleware/authMiddleware";
-import { getUsersData } from "../controllers/userController";
+import { protect } from "../middleware/authMiddleware.js";
+import { getUsersData, storeRecentSearchedCities } from "../controllers/userController.js";
 
 const userRouter = express.Router();
 

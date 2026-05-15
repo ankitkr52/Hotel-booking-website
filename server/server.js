@@ -5,6 +5,7 @@ import connectDB from "./configs/db.js";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import userRouter from "./routes/userRoutes.js";
 import hotelRouter from "./routes/hotelRoutes.js";
+import { clerkMiddleware } from "@clerk/express";
 
 connectDB();
 
@@ -14,7 +15,7 @@ app.use(cors())
 // middleware
 
 app.use(express.json())
-// app.use(clerkMiddleware())
+app.use(clerkMiddleware())
 app.post("/webhooks/clerk", clerkWebhooks)
 
 // routing 
