@@ -4,19 +4,26 @@ import cors from "cors";
 import connectDB from "./configs/db.js";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import userRouter from "./routes/userRoutes.js";
+import hotelRouter from "./routes/hotelRoutes.js";
 
 connectDB();
 
 const app = express();
 
 app.use(cors())
-app.use(express.json())
+// middleware
 
+app.use(express.json())
+// app.use(clerkMiddleware())
 app.post("/webhooks/clerk", clerkWebhooks)
 
+// routing 
 app.get('/', (req, res) => res.send("API is working here"))
-app.use("/api/users",userRouter)
+app.use("/api/users", userRouter)
+app.use("/api/hotels", hotelRouter)
 
+
+// server 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Server is running")
 })
