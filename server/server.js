@@ -6,8 +6,10 @@ import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import userRouter from "./routes/userRoutes.js";
 import hotelRouter from "./routes/hotelRoutes.js";
 import { clerkMiddleware } from "@clerk/express";
+import connectCloudinary from "./configs/cloudinary.js";
 
 connectDB();
+connectCloudinary()
 
 const app = express();
 
