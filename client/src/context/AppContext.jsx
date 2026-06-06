@@ -5,12 +5,15 @@ import { createContext } from 'react'
 import { useNavigate } from "react-router-dom"
 import { useUser, useAuth } from '@clerk/clerk-react'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useEffect } from 'react'
+
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 
 const AppContext = createContext()
 
-export const Appprovider = ({ Children }) => {
+export const Approvider = ({ children }) => {
     const currency = import.meta.env.VITE_CURRENCY || "$"
     const navigate = useNavigate()
     const { user } = useUser()
@@ -18,24 +21,37 @@ export const Appprovider = ({ Children }) => {
 
     const [isOwner, setIsOwner] = useState(false)
     const [ShowHotelReg, setShowHotelReg] = useState(false)
+    const [searchedCities, setSearchedCities] = useState([])
 
     const fetchUser = async () => {
         try {
             const { data } = await axios.get('/api/user', { headers: { Authorization: `Bearer ${await getToken()}` } })
-            if(data.success){
-                setIsOwner(data.role==="hotelOwner");
+            if (data.success) {
+                setIsOwner(data.role === "hotelOwner");
+                setSearchedCities(data.recentSearchedCities)
+            }
+            else {
+                // retrying fetching user details after 5 second
+                setTimeout(() => {
+                    fetchUser()
+                }, 5000)
             }
         } catch (error) {
-
+            toast.error(error.message)
         }
     }
+    useEffect(() => {
+        if (user) {
+            fetchUser()
+        }
+    }, [user])
 
     const value = {
-        currency, navigate, user, getToken, isOwner, setIsOwner, axios, ShowHotelReg, setShowHotelReg
+        currency, navigate, user, getToken, isOwner, setIsOwner, axios, ShowHotelReg, setShowHotelReg, searchedCities, setSearchedCities
     }
     return (
-        <AppContext.Provider value={ }>
-            {Children}
+        <AppContext.Provider value={value }>
+            {children}
         </AppContext.Provider>
     )
 }
