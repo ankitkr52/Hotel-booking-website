@@ -73,7 +73,7 @@ const Testimonial = () => {
 
               {/* Star Rating with Shadow */}
               <div className="flex items-center gap-1 mb-5 group-hover:scale-105 transition-transform duration-300">
-                <StarRating />
+               <StarRating rating={testimonial.rating} />
               </div>
 
               {/* Review Text */}
