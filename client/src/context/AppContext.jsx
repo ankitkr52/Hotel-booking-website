@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useContext } from 'react'
 import { createContext } from 'react'
 import { useNavigate } from "react-router-dom"
-import { useUser, useAuth } from    '@clerk/clerk-react'
+import { useUser, useAuth } from '@clerk/clerk-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useEffect } from 'react'
@@ -25,7 +25,7 @@ export const AppProvider = ({ children }) => {
 
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get('/api/user', { headers: { Authorization: `Bearer ${await getToken()}` } })
+            const { data } = await axios.get('/api/users', { headers: { Authorization: `Bearer ${await getToken()}` } })
             if (data.success) {
                 setIsOwner(data.role === "hotelOwner");
                 setSearchedCities(data.recentSearchedCities)
