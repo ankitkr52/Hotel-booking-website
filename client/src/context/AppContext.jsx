@@ -22,6 +22,8 @@ export const AppProvider = ({ children }) => {
     const [isOwner, setIsOwner] = useState(false)
     const [ShowHotelReg, setShowHotelReg] = useState(false)
     const [searchedCities, setSearchedCities] = useState([])
+    const [hotelData, setHotelData] = useState(null)
+    const [hotelLoading, setHotelLoading] = useState(true)
 
     const fetchUser = async () => {
         try {
@@ -29,6 +31,11 @@ export const AppProvider = ({ children }) => {
             if (data.success) {
                 setIsOwner(data.role === "hotelOwner");
                 setSearchedCities(data.recentSearchedCities)
+                if (data.role === "hotelOwner") {
+                    fetchHotelData()
+                } else {
+                    setHotelLoading(false)
+                }
             }
             else {
                 // retrying fetching user details after 5 second
@@ -46,8 +53,23 @@ export const AppProvider = ({ children }) => {
         }
     }, [user])
 
+    const fetchHotelData = async () => {
+        try {
+            const { data } = await axios.get('/api/hotels/my-hotel', { headers: { Authorization: `Bearer ${await getToken()}` } })
+            if (data.success) {
+                setHotelData(data.hotel)
+            } else {
+                setHotelData(null)
+            }
+        } catch (error) {
+            setHotelData(null)
+        } finally {
+            setHotelLoading(false)
+        }
+    }
+
     const value = {
-        currency, navigate, user, getToken, isOwner, setIsOwner, axios, ShowHotelReg, setShowHotelReg, searchedCities, setSearchedCities
+        currency, navigate, user, getToken, isOwner, setIsOwner, axios, ShowHotelReg, setShowHotelReg, searchedCities, setSearchedCities, hotelData, setHotelData, hotelLoading, fetchHotelData
     }
     return (
         <AppContext.Provider value={value}>
