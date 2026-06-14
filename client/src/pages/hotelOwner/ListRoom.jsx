@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import Title from "../../components/Title";
 import { useAppContext } from "../../context/appContext";
+import toast from "react-hot-toast";
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState([]);
@@ -12,7 +12,28 @@ const ListRoom = () => {
     setRooms(updated);
   };
 
-  const {axios,getToken,user}=useAppContext()
+  const { axios, getToken, user } = useAppContext()
+  const fetchRooms = async () => {
+    try {
+      const { data } = await axios.get("/api/rooms/owner", { headers: { Authorization: `Bearer ${await getToken()}` } })
+      if (data.success) {
+        setRooms(data.rooms)
+      }
+      else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+  
+
+  useEffect(()=>{
+if(user){
+  fetchRooms()
+}
+  },[user])
+
   return (
     <div className="pb-10">
       <Title
@@ -106,27 +127,24 @@ const ListRoom = () => {
                   <td className="px-6 py-4 text-center">
                     <button
                       onClick={() => toggleAvailability(index)}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                        item.isAvailable
-                          ? "bg-emerald-500"
-                          : "bg-gray-300"
-                      }`}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${item.isAvailable
+                        ? "bg-emerald-500"
+                        : "bg-gray-300"
+                        }`}
                     >
                       <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${
-                          item.isAvailable
-                            ? "translate-x-6"
-                            : "translate-x-1"
-                        }`}
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${item.isAvailable
+                          ? "translate-x-6"
+                          : "translate-x-1"
+                          }`}
                       />
                     </button>
 
                     <p
-                      className={`text-xs mt-1 ${
-                        item.isAvailable
-                          ? "text-emerald-600"
-                          : "text-gray-400"
-                      }`}
+                      className={`text-xs mt-1 ${item.isAvailable
+                        ? "text-emerald-600"
+                        : "text-gray-400"
+                        }`}
                     >
                       {item.isAvailable ? "Available" : "Hidden"}
                     </p>
