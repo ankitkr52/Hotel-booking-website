@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { roomsDummyData } from "../../assets/assets";
+
 import Title from "../../components/Title";
+import { useAppContext } from "../../context/appContext";
 
 const ListRoom = () => {
-  const [rooms, setRooms] = useState(roomsDummyData);
+  const [rooms, setRooms] = useState([]);
 
   const toggleAvailability = (index) => {
     const updated = [...rooms];
@@ -11,6 +12,7 @@ const ListRoom = () => {
     setRooms(updated);
   };
 
+  const {axios,getToken,user}=useAppContext()
   return (
     <div className="pb-10">
       <Title
