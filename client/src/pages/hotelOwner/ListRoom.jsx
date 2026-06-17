@@ -5,18 +5,16 @@ import toast from "react-hot-toast";
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState([]);
-
-  const toggleAvailability = (index) => {
-    const updated = [...rooms];
-    updated[index].isAvailable = !updated[index].isAvailable;
-    setRooms(updated);
-  };
-
   const { axios, getToken, user } = useAppContext()
+
+
+
+
   const fetchRooms = async () => {
     try {
       const { data } = await axios.get("/api/rooms/owner", { headers: { Authorization: `Bearer ${await getToken()}` } })
       if (data.success) {
+
         setRooms(data.rooms)
       }
       else {
@@ -26,13 +24,37 @@ const ListRoom = () => {
       toast.error(error.message)
     }
   }
-  
 
-  useEffect(()=>{
-if(user){
-  fetchRooms()
-}
-  },[user])
+
+  const toggleAvailability = async (roomId) => {
+    try {
+      const { data } = await axios.post(
+        "/api/rooms/toggle-availability",
+        { roomId },
+        { headers: { Authorization: `Bearer ${await getToken()}` } }
+      )
+
+      if (data.success) {
+        toast.success(data.message)
+        setRooms((prevRooms) =>
+          prevRooms.map((room) =>
+            room._id === roomId ? { ...room, isAvailable: data.room?.isAvailable ?? !room.isAvailable } : room
+          )
+        )
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message)
+    }
+  };
+
+
+  useEffect(() => {
+    if (user) {
+      fetchRooms()
+    }
+  }, [user])
 
   return (
     <div className="pb-10">
@@ -80,7 +102,7 @@ if(user){
             <tbody>
               {rooms.map((item, index) => (
                 <tr
-                  key={index}
+                  key={item._id}
                   className="border-t border-gray-100 hover:bg-gray-50 transition"
                 >
                   {/* ROOM */}
@@ -126,7 +148,7 @@ if(user){
                   {/* TOGGLE */}
                   <td className="px-6 py-4 text-center">
                     <button
-                      onClick={() => toggleAvailability(index)}
+                      onClick={() => toggleAvailability(item._id)}
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${item.isAvailable
                         ? "bg-emerald-500"
                         : "bg-gray-300"
