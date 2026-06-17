@@ -63,16 +63,30 @@ export const getOwnerRooms = async (req, res) => {
     }
 }
 
-// API to toggel availabity of a room 
+// API to toggle availability of a room
 
-export const toggelRoomAvailability = async (req, res) => {
+export const toggleRoomAvailability = async (req, res) => {
     try {
         const { roomId } = req.body
+        if (!roomId) {
+            return res.status(400).json({ success: false, message: "roomId is required" })
+        }
+
         const roomData = await Room.findById(roomId)
-        roomData.isAvailable = !roomData.isAvailable;
+        if (!roomData) {
+            return res.status(404).json({ success: false, message: "Room not found" })
+        }
+
+        const hotelData = await Hotel.findOne({ owner: req.user._id })
+        if (!hotelData || roomData.hotel.toString() !== hotelData._id.toString()) {
+            return res.status(403).json({ success: false, message: "Not authorized to update this room" })
+        }
+
+        roomData.isAvailable = !roomData.isAvailable
         await roomData.save()
-        res.json({ success: true, message: "Room availability update " })
+
+        res.json({ success: true, message: "Room availability updated", room: roomData })
     } catch (error) {
-        res.json({ success: false, message: error.message })
+        res.status(500).json({ success: false, message: error.message })
     }
 }
