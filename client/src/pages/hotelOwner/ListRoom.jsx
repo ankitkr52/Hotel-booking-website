@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState([]);
-  const { axios, getToken, user } = useAppContext()
+  const { axios, getToken, user,currency } = useAppContext()
 
 
 
@@ -138,7 +138,7 @@ const ListRoom = () => {
 
                   {/* PRICE */}
                   <td className="px-6 py-4 font-semibold text-gray-800">
-                    ₹{item.pricePerNight}
+                    {currency}{item.pricePerNight}
                     <span className="text-xs text-gray-400">
                       {" "}
                       / night
@@ -150,7 +150,7 @@ const ListRoom = () => {
                     <button
                       onClick={() => toggleAvailability(item._id)}
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${item.isAvailable
-                        ? "bg-emerald-500"
+                        ? "bg-orange-600"
                         : "bg-gray-300"
                         }`}
                     >
