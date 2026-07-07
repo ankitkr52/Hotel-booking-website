@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import { useEffect } from 'react'
 
 
+
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 
 const AppContext = createContext()
@@ -24,6 +25,28 @@ export const AppProvider = ({ children }) => {
     const [searchedCities, setSearchedCities] = useState([])
     const [hotelData, setHotelData] = useState(null)
     const [hotelLoading, setHotelLoading] = useState(true)
+    const [rooms, setRooms] = useState([])
+    const [roomsLoading, setRoomsLoading] = useState(true)
+
+   const fetchRooms = async () => {
+        try {
+            setRoomsLoading(true)
+            const { data } = await axios.get('/api/rooms')
+            
+            if (data.success) {
+                setRooms(data.rooms || [])
+            } else {
+                toast.error(data.message || "Failed to fetch rooms")
+                setRooms([])
+            }
+        } catch (error) {
+            console.error("Fetch rooms error:", error)
+            toast.error("Failed to load destinations")
+            setRooms([])
+        } finally {
+            setRoomsLoading(false)
+        }
+    }
 
     const fetchUser = async () => {
         try {
@@ -53,6 +76,10 @@ export const AppProvider = ({ children }) => {
         }
     }, [user])
 
+    useEffect(() => {
+        fetchRooms()
+    }, [])
+
     const fetchHotelData = async () => {
         try {
             const { data } = await axios.get('/api/hotels/my-hotel', { headers: { Authorization: `Bearer ${await getToken()}` } })
@@ -69,7 +96,7 @@ export const AppProvider = ({ children }) => {
     }
 
     const value = {
-        currency, navigate, user, getToken, isOwner, setIsOwner, axios, ShowHotelReg, setShowHotelReg, searchedCities, setSearchedCities, hotelData, setHotelData, hotelLoading, fetchHotelData
+        currency, navigate, user, getToken, isOwner, setIsOwner, axios, ShowHotelReg, setShowHotelReg, searchedCities, setSearchedCities, hotelData, setHotelData, hotelLoading, fetchHotelData, rooms, setRooms ,roomsLoading ,fetchRooms
     }
     return (
         <AppContext.Provider value={value}>
