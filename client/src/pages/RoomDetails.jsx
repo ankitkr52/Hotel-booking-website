@@ -10,7 +10,7 @@ import toast from 'react-hot-toast'
 const RoomDetails = () => {
   const { id } = useParams()
   const [room, setroom] = useState(null)
-  const { rooms, navigate, getToken, axios } = useAppContext()
+  const { rooms, navigate, getToken, axios,currency} = useAppContext()
   const [mainImage, setMainImage] = useState(null)
   const [checkInDate, setCheckInDate] = useState(null)
   const [checkOutDate, setCheckOutDate] = useState(null)
@@ -150,7 +150,7 @@ const RoomDetails = () => {
               STARTING FROM
             </p>
             <p className="text-5xl md:text-6xl font-semibold text-gray-900">
-              ${room.pricePerNight}
+              {currency}{room.pricePerNight}
               <span className="text-xl font-normal text-gray-400">/night</span>
             </p>
 

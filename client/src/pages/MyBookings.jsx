@@ -5,7 +5,7 @@ import { useAppContext } from '../context/AppContext';
 
 const MyBookings = () => {
 
-    const { axios, getToken, user } = useAppContext()
+    const { axios, getToken, user,currency } = useAppContext()
 
     const [bookings, setBookings] = useState([]);
 
@@ -85,7 +85,7 @@ const MyBookings = () => {
                                     </div>
 
                                     <p className="text-lg font-semibold text-gray-900 mt-3">
-                                        Total: <span className="text-orange-600">${booking.totalPrice}</span>
+                                        Total: <span className="text-orange-600">{currency}{booking.totalPrice}</span>
                                     </p>
                                 </div>
                             </div>

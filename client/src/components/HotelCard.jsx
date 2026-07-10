@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { assets } from '../assets/assets'
+import { useAppContext } from '../context/AppContext'
 
 const HotelCard = ({ room, index }) => {
+    const {currency}=useAppContext()
     return (
         <Link
             to={`/rooms/${room._id}`}
@@ -58,7 +60,7 @@ const HotelCard = ({ room, index }) => {
                     <div>
                         <p className="text-xs text-gray-500 mb-1 group-hover:text-gray-600 transition-colors">Starting from</p>
                         <p className='text-2xl font-bold text-gray-900 group-hover:text-black group-hover:scale-105 transition-all duration-300 origin-left'>
-                            ${room.pricePerNight}
+                            {currency}{room.pricePerNight}
                             <span className="text-sm font-normal text-gray-500">/night</span>
                         </p>
                     </div>
