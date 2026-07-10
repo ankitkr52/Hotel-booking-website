@@ -1,22 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Title from '../components/Title';
-import { assets, userBookingsDummyData } from '../assets/assets';
+import { assets, } from '../assets/assets';
+import { useAppContext } from '../context/AppContext';
 
 const MyBookings = () => {
-    const [bookings] = useState(userBookingsDummyData);
+
+    const { axios, getToken, user } = useAppContext()
+
+    const [bookings, setBookings] = useState([]);
+
+    const fetchUserBookings = async () => {
+        try {
+            const { data } = await axios.get('/api/bookings/user', { headers: { Authorization: `Bearer ${await getToken()}` } })
+            if (data.success) {
+                setBookings(data.bookings)
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    useEffect(()=>{
+        if(user){
+            fetchUserBookings()
+        }
+    },[user])
 
     return (
         <div className="py-28 md:pt-32 md:pb-40 px-4 md:px-16 lg:px-24 xl:px-32 bg-gray-50 min-h-screen">
             <div className="max-w-7xl mx-auto">
-                <Title 
-                    title="My Bookings" 
-                    subTitle="Easily manage your past, current, and upcoming hotel reservations in one place." 
-                    align="left" 
+                <Title
+                    title="My Bookings"
+                    subTitle="Easily manage your past, current, and upcoming hotel reservations in one place."
+                    align="left"
                 />
 
                 {/* Bookings List */}
                 <div className="mt-12 bg-white rounded-3xl shadow-sm overflow-hidden border border-gray-100">
-                    
+
                     {/* Table Header (Desktop) */}
                     <div className="hidden md:grid md:grid-cols-[3fr_2fr_1.2fr] bg-gray-50 border-b border-gray-200 px-8 py-5 font-medium text-gray-600 text-sm uppercase tracking-wider">
                         <div>Hotel & Room</div>
@@ -26,20 +50,20 @@ const MyBookings = () => {
 
                     {/* Bookings */}
                     {bookings.map((booking) => (
-                        <div 
-                            key={booking._id} 
+                        <div
+                            key={booking._id}
                             className="grid grid-cols-1 md:grid-cols-[3fr_2fr_1.2fr] border-b border-gray-100 last:border-none hover:bg-gray-50 transition-colors duration-200 px-6 md:px-8 py-8 md:py-7"
                         >
                             {/* Hotel & Room Details */}
                             <div className="flex flex-col md:flex-row gap-5 md:gap-6">
                                 <div className="flex-shrink-0">
-                                    <img 
-                                        src={booking.room.images[0]} 
+                                    <img
+                                        src={booking.room.images[0]}
                                         alt={booking.hotel.name}
-                                        className="w-full md:w-40 h-40 md:h-28 object-cover rounded-2xl shadow-sm" 
+                                        className="w-full md:w-40 h-40 md:h-28 object-cover rounded-2xl shadow-sm"
                                     />
                                 </div>
-                                
+
                                 <div className="flex flex-col gap-2">
                                     <div>
                                         <p className="font-playfair text-2xl md:text-3xl text-gray-900">
@@ -71,10 +95,10 @@ const MyBookings = () => {
                                 <div>
                                     <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">Check-In</p>
                                     <p className="font-medium text-gray-800">
-                                        {new Date(booking.checkInDate).toLocaleDateString('en-US', { 
-                                            weekday: 'short', 
-                                            month: 'short', 
-                                            day: 'numeric' 
+                                        {new Date(booking.checkInDate).toLocaleDateString('en-US', {
+                                            weekday: 'short',
+                                            month: 'short',
+                                            day: 'numeric'
                                         })}
                                     </p>
                                 </div>
@@ -82,10 +106,10 @@ const MyBookings = () => {
                                 <div>
                                     <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">Check-Out</p>
                                     <p className="font-medium text-gray-800">
-                                        {new Date(booking.checkOutDate).toLocaleDateString('en-US', { 
-                                            weekday: 'short', 
-                                            month: 'short', 
-                                            day: 'numeric' 
+                                        {new Date(booking.checkOutDate).toLocaleDateString('en-US', {
+                                            weekday: 'short',
+                                            month: 'short',
+                                            day: 'numeric'
                                         })}
                                     </p>
                                 </div>
@@ -94,8 +118,8 @@ const MyBookings = () => {
                             {/* Payment Status */}
                             <div className="mt-6 md:mt-0 flex flex-col items-start md:items-end justify-center">
                                 <div className={`flex items-center gap-2 px-5 py-2 rounded-2xl 
-                                    ${booking.isPaid 
-                                        ? 'bg-green-100 text-green-700' 
+                                    ${booking.isPaid
+                                        ? 'bg-green-100 text-green-700'
                                         : 'bg-red-100 text-red-700'}`}
                                 >
                                     <div className={`w-3 h-3 rounded-full ${booking.isPaid ? "bg-green-600" : "bg-red-600"}`} />
@@ -105,7 +129,7 @@ const MyBookings = () => {
                                 </div>
 
                                 {!booking.isPaid && (
-                                    <button 
+                                    <button
                                         className="mt-5 px-8 py-3 bg-orange-600 hover:bg-orange-700 
                                                    text-white text-sm font-medium rounded-2xl 
                                                    transition-all active:scale-95 shadow-sm"
