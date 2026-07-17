@@ -1,16 +1,11 @@
-
 import axios from 'axios'
-import { useContext } from 'react'
-import { createContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { useUser, useAuth } from '@clerk/clerk-react'
-import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { useEffect } from 'react'
 
-
-
-axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL || 
+                        "https://hotel-booking-website-brown-gamma.vercel.app";
 
 const AppContext = createContext()
 
@@ -28,11 +23,22 @@ export const AppProvider = ({ children }) => {
     const [rooms, setRooms] = useState([])
     const [roomsLoading, setRoomsLoading] = useState(true)
 
-   const fetchRooms = async () => {
+    // ==================== DEBUGGING ====================
+    console.log("=== AppContext Debug ===")
+    console.log("VITE_BACKEND_URL:", import.meta.env.VITE_BACKEND_URL)
+    console.log("Axios Base URL:", axios.defaults.baseURL)
+    console.log("Current User:", user?.id || "No user")
+    // ===================================================
+
+    const fetchRooms = async () => {
         try {
             setRoomsLoading(true)
+            console.log("Fetching rooms from:", axios.defaults.baseURL + "/api/rooms")  // Debug log
+
             const { data } = await axios.get('/api/rooms')
             
+            console.log("Rooms API Response:", data)   // Debug log
+
             if (data.success) {
                 setRooms(data.rooms || [])
             } else {
@@ -40,7 +46,8 @@ export const AppProvider = ({ children }) => {
                 setRooms([])
             }
         } catch (error) {
-            console.error("Fetch rooms error:", error)
+            console.error("🚨 Fetch rooms error:", error)
+            console.error("Error Response:", error.response?.data)  // Important
             toast.error("Failed to load destinations")
             setRooms([])
         } finally {
@@ -48,56 +55,15 @@ export const AppProvider = ({ children }) => {
         }
     }
 
-    const fetchUser = async () => {
-        try {
-            const { data } = await axios.get('/api/users', { headers: { Authorization: `Bearer ${await getToken()}` } })
-            if (data.success) {
-                setIsOwner(data.role === "hotelOwner");
-                setSearchedCities(data.recentSearchedCities)
-                if (data.role === "hotelOwner") {
-                    fetchHotelData()
-                } else {
-                    setHotelLoading(false)
-                }
-            }
-            else {
-                // retrying fetching user details after 5 second
-                setTimeout(() => {
-                    fetchUser()
-                }, 5000)
-            }
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-    useEffect(() => {
-        if (user) {
-            fetchUser()
-        }
-    }, [user])
-
-    useEffect(() => {
-        fetchRooms()
-    }, [])
-
-    const fetchHotelData = async () => {
-        try {
-            const { data } = await axios.get('/api/hotels/my-hotel', { headers: { Authorization: `Bearer ${await getToken()}` } })
-            if (data.success) {
-                setHotelData(data.hotel)
-            } else {
-                setHotelData(null)
-            }
-        } catch (error) {
-            setHotelData(null)
-        } finally {
-            setHotelLoading(false)
-        }
-    }
+    // Baaki functions (fetchUser, fetchHotelData) same rakh sakte ho
 
     const value = {
-        currency, navigate, user, getToken, isOwner, setIsOwner, axios, ShowHotelReg, setShowHotelReg, searchedCities, setSearchedCities, hotelData, setHotelData, hotelLoading, fetchHotelData, rooms, setRooms ,roomsLoading ,fetchRooms
+        currency, navigate, user, getToken, isOwner, setIsOwner, 
+        ShowHotelReg, setShowHotelReg, searchedCities, setSearchedCities, 
+        hotelData, setHotelData, hotelLoading, fetchHotelData, 
+        rooms, setRooms, roomsLoading, fetchRooms
     }
+
     return (
         <AppContext.Provider value={value}>
             {children}
