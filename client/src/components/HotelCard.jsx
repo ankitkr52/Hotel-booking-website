@@ -4,7 +4,7 @@ import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
 
 const HotelCard = ({ room, index }) => {
-    const {currency}=useAppContext()
+    const { currency } = useAppContext()
     return (
         <Link
             to={`/rooms/${room._id}`}
@@ -23,7 +23,7 @@ const HotelCard = ({ room, index }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
 
                 {/* Shine Effect */}
-               <div className="absolute inset-0 -translate-x-[150%] group-hover:translate-x-[150%] transition-all duration-700 ease-out bg-gradient-to-r from-transparent via-white/40 via-50% to-transparent" />
+                <div className="absolute inset-0 -translate-x-[150%] group-hover:translate-x-[150%] transition-all duration-700 ease-out bg-gradient-to-r from-transparent via-white/40 via-50% to-transparent" />
 
                 {/* Best Seller Badge with Glow */}
                 {index % 2 === 0 && (
