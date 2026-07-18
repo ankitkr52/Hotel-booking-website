@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import heroImage from '../assets/heroImage3.png'
+import heroImage from '../assets/polish.jpg'
 import { assets } from '../assets/assets'
 import { cities } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
