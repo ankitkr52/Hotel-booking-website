@@ -18,9 +18,9 @@ const app = express();
 app.use(cors())
 // middleware
 
-app.use(express.json())
 app.use(clerkMiddleware())
 app.post("/webhooks/clerk", clerkWebhooks)
+app.use(express.json())
 
 // routing 
 app.get('/', (req, res) => res.send("API is working here"))
