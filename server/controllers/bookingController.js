@@ -318,7 +318,7 @@ export const createBooking = async (req, res) => {
 // get/api/booking/users
 export const getUsersBookings = async (req, res) => {
     try {
-        const user = req.user._id
+        const user = req.user._id 
         const bookings = await Booking.find({ user }).populate("room hotel").sort({ createdAt: -1 })
         res.json({ success: true, bookings })
     } catch (error) {
@@ -328,7 +328,7 @@ export const getUsersBookings = async (req, res) => {
 
 export const getHotelBookings = async (req, res) => {
     try {
-        const hotel = await Hotel.findOne({ owner: req.auth.userId })
+        const hotel = await Hotel.findOne({  owner: req.user._id })
         if (!hotel) {
             return res.json({ success: false, message: "No Hotel Found" })
         }
