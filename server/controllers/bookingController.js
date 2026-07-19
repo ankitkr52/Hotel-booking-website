@@ -2,6 +2,7 @@ import transporter from "../configs/nodemailer.js";
 import Booking from "../models/Booking.js";
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
+import Razorpay from 'razorpay'
 
 
 // Function to check Avability of rooms
@@ -318,7 +319,7 @@ export const createBooking = async (req, res) => {
 // get/api/booking/users
 export const getUsersBookings = async (req, res) => {
     try {
-        const user = req.user._id 
+        const user = req.user._id
         const bookings = await Booking.find({ user }).populate("room hotel").sort({ createdAt: -1 })
         res.json({ success: true, bookings })
     } catch (error) {
@@ -328,7 +329,7 @@ export const getUsersBookings = async (req, res) => {
 
 export const getHotelBookings = async (req, res) => {
     try {
-        const hotel = await Hotel.findOne({  owner: req.user._id })
+        const hotel = await Hotel.findOne({ owner: req.user._id })
         if (!hotel) {
             return res.json({ success: false, message: "No Hotel Found" })
         }
@@ -340,5 +341,52 @@ export const getHotelBookings = async (req, res) => {
         res.json({ success: true, dashboardData: { totalBookings, totalRevenue, bookings } })
     } catch (error) {
         res.json({ success: false, message: error.message })
+    }
+}
+
+export const createRazorpayOrder = async (req, res) => {
+    try {
+        const { bookingId } = req.body
+
+        
+        const booking = await Booking.findById(bookingId)
+
+        if (!booking) {
+            return res.json({ success: false, message: "Booking not found" })
+        }
+
+        if (booking.isPaid) {
+            return res.json({ success: false, message: "Already paid" })
+        }
+
+        // 
+        const roomData = await Room.findById(booking.room).populate('hotel')
+
+        
+        const razorpayInstance = new Razorpay({
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_KEY_SECRET,
+        })
+
+        // ✅ Order banao — Razorpay ka sahi API
+        const order = await razorpayInstance.orders.create({
+            amount: booking.totalPrice * 100,  // paise mein
+            currency: "INR",
+            receipt: `booking_${bookingId}`,
+            notes: {
+                bookingId: bookingId.toString(),
+                hotelName: roomData.hotel.name,
+                roomType: roomData.roomType
+            }
+        })
+
+        res.json({ 
+            success: true, 
+            order,
+            key: process.env.RAZORPAY_KEY_ID  
+        })
+
+    } catch (error) {
+        res.json({ success: false, message: error.message })  
     }
 }

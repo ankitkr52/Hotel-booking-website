@@ -20,6 +20,7 @@
     "mongoose": "^9.6.1",
     "multer": "^2.1.1",
     "nodemailer": "^9.0.3",
+    "razorpay": "^2.9.8",
     "svix": "^1.92.2"
   },
   "devDependencies": {
