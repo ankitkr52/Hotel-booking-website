@@ -41,7 +41,9 @@ import totalBookingIcon from "./totalBookingIcon.svg";
 import totalRevenueIcon from "./totalRevenueIcon.svg";
 
 
+
 export const assets = {
+    
     logo,
     logo1,
     luxebookIcon,

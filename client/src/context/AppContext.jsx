@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser, useAuth } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 
-axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL || 
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL 
                         "https://hotel-booking-website-brown-gamma.vercel.app";
 
 const AppContext = createContext();
@@ -23,22 +23,27 @@ export const AppProvider = ({ children }) => {
     const [rooms, setRooms] = useState([]);
     const [roomsLoading, setRoomsLoading] = useState(true);
 
-    // ==================== FUNCTIONS ====================
 
     const fetchRooms = async () => {
         try {
             setRoomsLoading(true);
             const { data } = await axios.get('/api/rooms');
-            
-            if (data.success) {
+
+            if (data?.success) {
                 setRooms(data.rooms || []);
             } else {
-                toast.error(data.message || "Failed to fetch rooms");
+                toast.error(data?.message || "Failed to fetch rooms");
                 setRooms([]);
             }
         } catch (error) {
-            console.error("Fetch rooms error:", error);
-            toast.error("Failed to load destinations");
+            console.error("🚨 Fetch rooms error:", error);
+            console.error("Response:", error.response?.data);
+            
+            const errorMsg = error.response?.data?.message || 
+                           error.message || 
+                           "Failed to load destinations";
+            
+            toast.error(errorMsg);
             setRooms([]);
         } finally {
             setRoomsLoading(false);
@@ -47,48 +52,56 @@ export const AppProvider = ({ children }) => {
 
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get('/api/users', { 
-                headers: { Authorization: `Bearer ${await getToken()}` } 
+            const token = await getToken();
+            const { data } = await axios.get('/api/users', {
+                headers: { Authorization: `Bearer ${token}` }
             });
 
-            if (data.success) {
+            if (data?.success) {
                 setIsOwner(data.role === "hotelOwner");
                 setSearchedCities(data.recentSearchedCities || []);
 
                 if (data.role === "hotelOwner") {
-                    fetchHotelData();
+                    await fetchHotelData();
                 } else {
                     setHotelLoading(false);
                 }
             } else {
-                setTimeout(() => fetchUser(), 5000);
+                toast.error(data?.message || "Failed to fetch user data");
+                setTimeout(() => fetchUser(), 5000); // retry
             }
         } catch (error) {
-            console.error("Fetch user error:", error);
-            toast.error("Failed to fetch user details");
+            console.error("🚨 Fetch user error:", error);
+            console.error("Response:", error.response?.data);
+            
+            toast.error(error.response?.data?.message || "Failed to load user details");
         }
     };
 
     const fetchHotelData = async () => {
         try {
-            const { data } = await axios.get('/api/hotels/my-hotel', { 
-                headers: { Authorization: `Bearer ${await getToken()}` } 
+            const token = await getToken();
+            const { data } = await axios.get('/api/hotels/my-hotel', {
+                headers: { Authorization: `Bearer ${token}` }
             });
 
-            if (data.success) {
+            if (data?.success) {
                 setHotelData(data.hotel);
             } else {
                 setHotelData(null);
+                toast.error(data?.message || "Failed to fetch hotel data");
             }
         } catch (error) {
-            console.error("Fetch hotel data error:", error);
+            console.error("🚨 Fetch hotel data error:", error);
+            console.error("Response:", error.response?.data);
             setHotelData(null);
+            toast.error(error.response?.data?.message || "Failed to load hotel details");
         } finally {
             setHotelLoading(false);
         }
     };
 
-    // ==================== EFFECTS ====================
+    
 
     useEffect(() => {
         if (user) {
@@ -100,7 +113,7 @@ export const AppProvider = ({ children }) => {
         fetchRooms();
     }, []);
 
-    // ==================== CONTEXT VALUE ====================
+    
 
     const value = {
         currency,
