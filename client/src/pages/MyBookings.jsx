@@ -121,7 +121,7 @@ const MyBookings = () => {
         } catch (error) {
             toast.error(error.message)
         } finally {
-            setPayingId(null)  // ✅ Reset loading
+            setPayingId(null) 
         }
     }
 
