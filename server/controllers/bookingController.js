@@ -3,6 +3,7 @@ import Booking from "../models/Booking.js";
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
 import Razorpay from 'razorpay'
+import crypto from 'crypto'
 
 
 // Function to check Avability of rooms
@@ -388,5 +389,65 @@ export const createRazorpayOrder = async (req, res) => {
 
     } catch (error) {
         res.json({ success: false, message: error.message })  
+    }
+}
+
+export const verifyRazorpayPayment = async (req, res) => {
+    try {
+        const {
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+            bookingId
+        } = req.body
+
+        // ✅ Step 1: Signature verify karo (Security check)
+        const body = razorpay_order_id + "|" + razorpay_payment_id
+
+        const expectedSignature = crypto
+            .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+            .update(body.toString())
+            .digest('hex')
+
+        const isAuthentic = expectedSignature === razorpay_signature
+
+        if (!isAuthentic) {
+            return res.json({
+                success: false,
+                message: "Payment verification failed! Invalid signature."
+            })
+        }
+
+        // ✅ Step 2: Booking update karo — isPaid: true
+        const updatedBooking = await Booking.findByIdAndUpdate(
+            bookingId,
+            {
+                isPaid: true,
+                paymentMethod: 'Razorpay',
+                status: 'Confirmed',
+                razorpayOrderId: razorpay_order_id,
+                razorpayPaymentId: razorpay_payment_id
+            },
+            {returnDocument: "after"}  
+        )
+
+        if (!updatedBooking) {
+            return res.json({
+                success: false,
+                message: "Booking not found!"
+            })
+        }
+
+        console.log(`✅ Payment verified! Booking ${bookingId} isPaid: true`)
+
+        res.json({
+            success: true,
+            message: "Payment verified successfully!",
+            booking: updatedBooking
+        })
+
+    } catch (error) {
+        console.error("Payment verification error:", error)
+        res.json({ success: false, message: error.message })
     }
 }

@@ -1,5 +1,5 @@
 import express from 'express'
-import { checkAvailabilityAPI, createBooking, getHotelBookings, getUsersBookings,createRazorpayOrder } from '../controllers/bookingController.js'
+import { checkAvailabilityAPI, createBooking, getHotelBookings, getUsersBookings,createRazorpayOrder,verifyRazorpayPayment} from '../controllers/bookingController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
 const bookingRouter = express.Router()
@@ -11,5 +11,6 @@ bookingRouter.get("/user", protect, getUsersBookings)
 bookingRouter.get("/hotel", protect, getHotelBookings)
 
 bookingRouter.post('/razorpay-payment', protect, createRazorpayOrder)
+bookingRouter.post('/verify-payment', protect, verifyRazorpayPayment)
 
 export default bookingRouter
